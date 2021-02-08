@@ -1,0 +1,2 @@
+[format]
+	pretty = format:%C(Yellow)%h %C(reset)%ad %C(Cyan)%an: %C(reset)%s
