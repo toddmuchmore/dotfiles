@@ -1,2 +1,5 @@
 [format]
 	pretty = format:%C(Yellow)%h %C(reset)%ad %C(Cyan)%an: %C(reset)%s
+[user]
+	name = Todd Muchmore
+	email = todd.muchmore@gmail.com
