@@ -125,3 +125,5 @@ alias diskUsage="sudo du -h -d 1 . |sort -h"
 
 # Load Angular CLI autocompletion.
 source <(ng completion script)
+
+. $HOME/.shellrc.load
