@@ -1,0 +1,22 @@
+[format]
+	pretty = format:%C(Yellow)%h %C(reset)%ad %C(Cyan)%an: %C(reset)%s
+[branch]
+  sort = -committerdate
+[tag]
+  sort = version:refname
+[user]
+	name = Todd Muchmore
+	email = todd.muchmore@gmail.com
+[init]
+	defaultBranch = main
+[pager]
+	branch = false
+[pull]
+	ff = only
+[oh-my-zsh]
+	hide-status = 1
+	hide-dirty = 1
+[fetch]
+  prune = true
+  pruneTags = true
+  all = true
