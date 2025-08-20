@@ -122,6 +122,7 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias dir="ls -la"
 alias diskUsage="sudo du -h -d 1 . |sort -h"
+alias n="nvim"
 
 # Load Angular CLI autocompletion.
 source <(ng completion script)
