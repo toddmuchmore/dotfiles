@@ -128,3 +128,4 @@ alias n="nvim"
 source <(ng completion script)
 
 . $HOME/.shellrc.load
+eval "$(~/.local/try.rb init ~/src/tries)"
