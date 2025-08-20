@@ -129,3 +129,6 @@ source <(ng completion script)
 
 . $HOME/.shellrc.load
 eval "$(~/.local/try.rb init ~/src/tries)"
+
+# opencode
+export PATH=/Users/todd/.opencode/bin:$PATH
