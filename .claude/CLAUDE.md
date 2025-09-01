@@ -1,0 +1,252 @@
+## Who I (the user) am
+
+I am Todd Muchmore (more info at https://www.toddmuchmore.org).
+
+My GitHub username is @!`git config github.user` and my email address is !`git config user.email`
+
+My main text editor is !`git config core.editor`.
+
+### General Coding Practices
+
+**Code Comment Guidelines**: Write comments that explain **why the code isn't written another way** rather than what it does. Focus on documenting "negative information" - what the code is *not* doing and why certain approaches were rejected. Comments should provide context about constraints, trade-offs, and non-obvious decisions that led to the current implementation. This is especially important for future developers and AI agents who need to understand not just the solution, but the problem space and alternatives that were considered.
+
+**When to Comment**: Generally, avoid comments. Add comments when: (1) you chose one approach over another seemingly valid option, (2) there are non-obvious constraints or requirements driving the implementation, (3) the code might appear inefficient or strange without context, (4) you're working around external limitations, or (5) future maintainers might reasonably ask "why didn't you just...?" The goal is to prevent others from attempting "improvements" that you already considered and rejected for good reasons. Keep comments brief but include the critical context that the code itself cannot convey.
+
+Optimize my code around reducing state, coupling, complexity and code, in that order. I’m willing to add increased coupling if it makes my code more stateless. I’m willing to make it more complex if it reduces coupling. And I’m willing to duplicate code if it makes the code less complex. Only if it doesn’t increase state, coupling or complexity do I dedupe code.
+
+## Commits
+
+Use **Conventional Commits** format for all commit messages:
+
+**Format:** `<type>[optional scope]: <description>`
+
+**Common Types:**
+- `feat:` New feature (correlates with MINOR in SemVer)
+- `fix:` Bug fix (correlates with PATCH in SemVer)
+- `docs:` Documentation only changes
+- `style:` Code style changes (formatting, semicolons, etc.)
+- `refactor:` Code changes that neither fix bugs nor add features
+- `perf:` Performance improvements
+- `test:` Adding or correcting tests
+- `build:` Changes to build system or dependencies
+- `ci:` CI configuration changes
+- `chore:` Other changes that don't modify src or test files
+- `revert:` Reverts a previous commit
+
+**Breaking Changes:**
+- Add `!` after type/scope: `feat!: send email when product ships`
+- Or add `BREAKING CHANGE:` in footer
+
+**Examples:**
+```
+feat: allow config object to extend other configs
+
+fix(parser): prevent racing of requests
+
+feat(lang): add Polish language
+
+chore!: drop support for Node 6
+
+BREAKING CHANGE: use JavaScript features not available in Node 6.
+```
+
+## GitHub Workflow
+
+This section outlines the exact process for interacting with GitHub, creating PRs, and managing issues.
+
+### Referencing Issues and Pull Requests
+
+When commenting/writing/anything that references an issue or pull request, you MUST use the following full-clarity markkdown format:
+
+```markdown
+[<issue_or_pr_title>](<issue_or_pr_url>)
+```
+
+### Issue and Pull Request Management
+
+1. **Finding and Viewing Issues**:
+
+```bash
+# List all issues in a repo
+gh issue list
+# List issues with specific label
+gh issue list --label "Discovery"
+# Search issues with a query
+gh issue list --search "DiscoveryToggle in:title"
+# Search issues with a query
+gh issue list --search "DiscoveryToggle in:title"
+
+# View a specific issue with the `joshbeckman/gh-view-md` gh CLI extension (you can install it with `shadowenv exec -- gh extension install joshbeckman/gh-view-md`)
+gh view-md ISSUE_URL
+```
+
+2. **Managing Labels**:
+
+```bash
+# List all labels in a repo
+gh label list
+# Add label to issue
+gh issue edit ISSUE_URL --add-label "Label"
+# Remove label from issue
+gh issue edit ISSUE_URL --remove-label "Label"
+```
+
+3. **Finding and Viewing Pull Requests**:
+
+```bash
+# List all PRs in a repo
+gh pr list
+# List PRs with specific label
+gh pr list --label "Discovery"
+# Search PRs with a query
+gh pr list --search "DiscoveryToggle in:title"
+
+# View a specific PR with the `joshbeckman/gh-view-md` shadowenv exec -- gh CLI extension
+gh view-md PR_URL
+# you can specify the max diff to show with the `--max-diff` option (default is 800 lines)
+gh view-md PR_URL --max-diff 1000
+```
+
+4. **Commenting on Issues and PRs**:
+
+```bash
+# Add a comment to an issue
+# first, write the comment markdown contents to a TMP_FILE
+gh issue comment ISSUE_URL --body-file TMP_FILE
+
+# Add a comment to a PR
+# first, write the comment markdown contents to a TMP_FILE
+gh issue comment PR_URL --body-file TMP_FILE
+```
+Important: Always prepend the comment with a note/disclaimer indicating that it was made with Claude Code, like this:
+```markdown
+> [!NOTE]
+> This comment was generated by Claude Code, an AI assistant. Please review it carefully before taking any action.
+```
+
+5. **Submitting Pull Request Reviews**:
+
+When reviewing PRs, use the following workflow:
+
+```bash
+# For approving reviews
+gh pr review PR_URL --approve --body "REVIEW_CONTENT"
+
+# For requesting changes
+gh pr review PR_URL --request-changes --body "REVIEW_CONTENT"
+
+# For commenting without approval/rejection
+gh pr review PR_URL --comment --body "REVIEW_CONTENT"
+```
+
+Important guidelines for PR reviews:
+- Always include the Claude Code disclaimer at the top of your review
+- Keep reviews focused and constructive
+- When suggesting improvements, be specific and provide examples
+- Consider both the immediate changes and their broader impact
+- For approvals, clearly state why you're approving
+- For change requests, explain what needs to be fixed and why
+
+Example review format:
+```markdown
+> [!NOTE]
+> This review was generated by Claude Code, an AI assistant. Please review it carefully before taking any action.
+
+## Review Summary
+
+Brief overview of what the PR does... (follow conventional comments format)
+
+### Strengths
+
+✅ **Point 1**: Explanation...
+✅ **Point 2**: Explanation...
+
+### Suggestions
+
+1. **Suggestion title**: Detailed explanation... (follow conventional comments format)
+2. **Another suggestion**: Explanation with example...
+
+### Overall Assessment
+
+Your conclusion and recommendation...
+```
+
+## Comments on Pull Requests or Changes
+
+Use **Conventional Comments** format for all PR/change comments to improve clarity and actionability:
+
+**Format:** `<label> [decorations]: <subject>`
+
+**Core Labels:**
+- **praise:** Highlight something positive (aim for at least one per review)
+- **nitpick:** Trivial preference-based requests (non-blocking by nature)
+- **suggestion:** Propose improvements with clear reasoning
+- **issue:** Highlight specific problems (pair with suggestions when possible)
+- **todo:** Small, necessary changes
+- **question:** Potential concerns needing clarification
+- **thought:** Ideas that arise during review (non-blocking, valuable for mentoring)
+- **chore:** Simple process-related tasks (include links to process docs)
+- **note:** Non-blocking items to highlight
+
+**Optional Decorations:**
+- **(non-blocking):** Won't prevent acceptance
+- **(blocking):** Must be resolved before acceptance
+- **(if-minor):** Only resolve if changes are trivial
+
+**Example:**
+```
+**suggestion (security):** Let's use the framework's DOM purifier instead.
+
+Implementing our own could introduce vulnerabilities.
+```
+
+---
+
+### General Tone
+
+**In summary:** Use a tone is that of a knowledgeable peer sharing practical insights and experiences in a direct, personal, and accessible manner. It's professional yet conversational, driven by genuine interest and a desire to share useful information.
+
+**Writing Style Guide**
+
+**1. Overall Tone & Voice:**
+    *   **Target Tone:** Informative, Pragmatic, Personal, Reflective, Accessible, Grounded Enthusiasm.
+    *   **Voice:** Write in the **first person ("I," "my," "we" if applicable)**. Share your genuine thoughts, experiences, and learning process. Be authentic.
+    *   **Attitude:** Be helpful and knowledge-sharing. Focus on practical application and real-world scenarios. Show enthusiasm for the topic but avoid unsubstantiated hype.
+
+**2. Audience:**
+    *   Assume an audience of **fellow tech professionals, developers, data engineers, or individuals interested in similar technical topics (Cloud, Data, Software).**
+    *   While the audience is technical, don't assume they know *everything* you do. Briefly explain concepts or provide links for deeper dives where appropriate. Define acronyms on first use unless extremely common (like AWS, SQL).
+
+**3. Purpose:**
+    *   Clearly define the goal of each post: Is it to explain a concept, share a solution, document a project, review a tool, or reflect on a trend?
+    *   Focus on providing **value** to the reader – actionable insights, clear explanations, useful code snippets, lessons learned.
+
+**4. Language & Word Choice:**
+    *   **Clarity is Key:** Use clear, direct language. Avoid ambiguity.
+    *   **Professional but Conversational:** Maintain a professional standard, but allow for a natural, conversational flow. Avoid overly formal or academic language. Contractions (like "don't," "it's") are acceptable.
+    *   **Technical Terms:** Use appropriate technical terminology, but explain or link to definitions for less common terms or when introducing a concept.
+    *   **Active Voice:** Prefer active voice ("I built a pipeline...") over passive voice ("A pipeline was built...") for more direct and engaging writing.
+    *   **Conciseness:** Avoid unnecessary jargon, filler words, or overly long sentences. Get to the point.
+
+**5. Sentence & Paragraph Structure:**
+    *   **Sentence Length:** Vary sentence length for better rhythm, but generally favor shorter to medium-length sentences for clarity.
+    *   **Paragraph Length:** Keep paragraphs relatively short and focused on a single idea or step. This improves readability, especially online.
+    *   **Logical Flow:** Ensure smooth transitions between paragraphs and sections.
+
+**6. Formatting & Structure:**
+    *   **Titles:** Use clear, descriptive titles that indicate the post's content.
+    *   **Headings & Subheadings:** Break up text with clear headings (H2, H3, etc.) to structure the content logically and make it scannable.
+    *   **Lists:** Use bullet points (for unordered items) or numbered lists (for steps or ordered items) to enhance readability.
+    *   **Code Blocks:** Use formatted code blocks for *any* code snippets, commands, or configuration examples. Specify the language if possible for syntax highlighting.
+    *   **Emphasis:** Use **bold** for emphasis or highlighting key terms occasionally. Use *italics* sparingly, perhaps for specific terms or titles.
+    *   **Links:** Link generously to external resources, documentation, related posts, or tools mentioned. Ensure links open in a new tab where appropriate.
+    *   **Images/Diagrams:** Use screenshots, diagrams, or relevant images to illustrate points, break up text, and make complex ideas easier to grasp.
+
+**7. Things to Avoid:**
+    *   Excessive hype or marketing language.
+    *   Overly strong opinions without justification or evidence.
+    *   Complaining without offering solutions or constructive criticism.
+    *   Dense blocks of text without breaks or formatting.
+    *   Assuming too much prior knowledge without providing context or links.
+    *   Vague or abstract language when concrete examples would be better.
+
