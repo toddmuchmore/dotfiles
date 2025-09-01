@@ -4,6 +4,8 @@
   sort = -committerdate
 [tag]
   sort = version:refname
+[github]
+	user = toddmuchmore 
 [user]
 	name = Todd Muchmore
 	email = todd.muchmore@gmail.com
@@ -16,6 +18,8 @@
 [oh-my-zsh]
 	hide-status = 1
 	hide-dirty = 1
+[core]
+	editor = nvim
 [fetch]
   prune = true
   pruneTags = true
