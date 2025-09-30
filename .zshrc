@@ -4,7 +4,7 @@
 export JAVA_HOME=/opt/homebrew/opt/java
 export MAVEN_HOME=/opt/homebrew/opt/maven
 
-export PATH=~/bin:$MAVEN_HOME/bin:$JAVA_HOME/bin:$PATH
+export PATH=~/bin:$MAVEN_HOME/bin:$JAVA_HOME/bin:~/.local/bin:$PATH
 
 export HOMEBREW_PREFIX="/opt/homebrew";
 export HOMEBREW_CELLAR="/opt/homebrew/Cellar";
