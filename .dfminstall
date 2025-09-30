@@ -2,3 +2,4 @@ README.md skip
 .config skip
 .config/nvim recurse
 .config/aerospace recurse
+.claude skip
